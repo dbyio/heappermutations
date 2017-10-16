@@ -27,8 +27,8 @@ _Strings_ returns all permutations of a slice of strings.
 import ( "github.com/dbyio/heappermutations" )
 
 sInts := []int{1, 2, 3}
-pInts := heappermutations.Ints(s)	// [[1 2 3] [2 1 3] [3 1 2] [1 3 2] [2 3 1] [3 2 1]]
+pInts := heappermutations.Ints(sInts)		// [[1 2 3] [2 1 3] [3 1 2] [1 3 2] [2 3 1] [3 2 1]]
 
-sString := []string{"a", "b", "c"}
-pStrings := heappermutations.Strings(s)	// [[a b c] [b a c] [c a b] [a c b] [b c a] [c b a]]
+sStrings := []string{"a", "b", "c"}
+pStrings := heappermutations.Strings(sStrings)	// [[a b c] [b a c] [c a b] [a c b] [b c a] [c b a]]
 ```
