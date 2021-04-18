@@ -22,3 +22,11 @@ func TestStrings(t *testing.T) {
 		t.Error("Expected 24")
 	}
 }
+
+func BenchmarkIntsPerm(b *testing.B) {
+	s := []int{}
+	for i := 0; i < 10; i++ {
+		s = append(s, i)
+	}
+	heappermutations.Ints(s)
+}
