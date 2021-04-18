@@ -3,8 +3,8 @@
 package heappermutations_test
 
 import (
-	"heappermutations"
 	"fmt"
+	"github.com/dbyio/heappermutations"
 	"testing"
 )
 
@@ -18,7 +18,7 @@ func ExampleInts() {
 func TestStrings(t *testing.T) {
 	s := []string{"abc", "def", "ghi", "jkl"}
 	perms := heappermutations.Strings(s)
-	if len(perms) != 24 {		// factorial(len(s)) == 24
+	if len(perms) != 24 { // factorial(len(s)) == 24
 		t.Error("Expected 24")
 	}
 }
