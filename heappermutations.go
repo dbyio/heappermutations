@@ -49,58 +49,62 @@ func (p stringSlice) Copy() heapInterface {
 
 // Ints returns all permutations of a slice of ints.
 func Ints(a []int) [][]int {
-	interfaceSlice := heapPermutations(intSlice(a))
-	permutations := make([][]int, len(interfaceSlice))
-
-	// Assert and transfer each permuted item to our target-typed structure
-	for i, d := range interfaceSlice {
-		permutations[i] = d.(intSlice)
+	permutations := [][]int{}
+	for d := range heapPermutationsCh(intSlice(a)) {
+		permutations = append(permutations, d.(intSlice))
 	}
 	return permutations
 }
 
 // Strings returns all permutations of a slice of strings.
 func Strings(a []string) [][]string {
-	interfaceSlice := heapPermutations(stringSlice(a))
-	permutations := make([][]string, len(interfaceSlice))
-
-	for i, d := range interfaceSlice {
-		permutations[i] = d.(stringSlice)
+	permutations := [][]string{}
+	for d := range heapPermutationsCh(stringSlice(a)) {
+		permutations = append(permutations, d.(stringSlice))
 	}
 	return permutations
 }
 
 // Float64s returns all permutations of a slice of float64s.
 func Float64s(a []float64) [][]float64 {
-	interfaceSlice := heapPermutations(float64Slice(a))
-	permutations := make([][]float64, len(interfaceSlice))
-
-	for i, d := range interfaceSlice {
-		permutations[i] = d.(float64Slice)
+	permutations := [][]float64{}
+	for d := range heapPermutationsCh(float64Slice(a)) {
+		permutations = append(permutations, d.(float64Slice))
 	}
 	return permutations
 }
 
 // An implementation of Heap's algorithm
-func heapPermutations(data heapInterface) []heapInterface {
-	permutations := []heapInterface{}
-	var generate func(int, heapInterface)
-
-	generate = func(n int, arr heapInterface) {
-		if n == 1 {
-			A := arr.Copy()
-			permutations = append(permutations, A)
-		} else {
-			for i := 0; i < n; i++ {
-				generate(n-1, arr)
-				if n%2 == 0 {
-					arr.Swap(i, n-1)
-				} else {
-					arr.Swap(0, n-1)
+func heapPermutationsCh(data heapInterface) chan heapInterface {
+	c := make(chan heapInterface, 10)
+	go func() {
+		var generate func(int, heapInterface)
+		generate = func(n int, arr heapInterface) {
+			if n == 1 {
+				A := arr.Copy()
+				c <- A
+			} else {
+				for i := 0; i < n; i++ {
+					generate(n-1, arr)
+					if n%2 == 0 {
+						arr.Swap(i, n-1)
+					} else {
+						arr.Swap(0, n-1)
+					}
 				}
 			}
 		}
+		generate(data.Len(), data)
+		close(c)
+	}()
+	return c
+}
+
+// heapPermutations returns a slice of permutation
+func heapPermutations(data heapInterface) []heapInterface {
+	permutations := []heapInterface{}
+	for p := range heapPermutationsCh(data) {
+		permutations = append(permutations, p)
 	}
-	generate(data.Len(), data)
 	return permutations
 }
