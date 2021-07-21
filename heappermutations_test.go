@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Nicolas Perraud <np bitbox io>
+// Copyright (c) 2021 Nicolas Perraud <np bitbox io>
 
 package heappermutations_test
 
