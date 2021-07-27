@@ -3,7 +3,7 @@
 package heappermutations_test
 
 import (
-	"heappermutations"
+	"github.com/dbyio/heappermutations"
 	"fmt"
 	"testing"
 )
