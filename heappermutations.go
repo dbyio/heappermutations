@@ -4,7 +4,7 @@
 // possible permutations following Heap's algorithm on typed collection.
 package heappermutations
 
-// Permute returns all permitations of a slice of generic types
+// Permute returns all permutations of a slice
 func Permute[T any](arr []T) [][]T {
 	return heapPermutations(arr)
 }
