@@ -1,34 +1,40 @@
-// Copyright (c) 2021 Nicolas Perraud <np bitbox io>
+// Copyright (c) 2023 Nicolas Perraud <np bitbox io>
 // Thanks: @yberman
 
 package heappermutations_test
 
 import (
 	"fmt"
-	"github.com/dbyio/heappermutations"
+	"math/rand"
 	"testing"
+
+	"github.com/dbyio/heappermutations"
 )
 
-func ExampleInts() {
+func ExamplePermute() {
 	s := []int{1, 2, 3}
-	perms := heappermutations.Ints(s)
+	perms := heappermutations.Permute[int](s)
 	fmt.Println(perms)
 	//Output: [[1 2 3] [2 1 3] [3 1 2] [1 3 2] [2 3 1] [3 2 1]]
 }
 
-func TestStrings(t *testing.T) {
+func TestPermute(t *testing.T) {
 	s := []string{"abc", "def", "ghi", "jkl"}
-	perms := heappermutations.Strings(s)
+	perms := heappermutations.Permute(s)
 	if len(perms) != 24 { // factorial(len(s)) == 24
 		t.Error("Expected 24")
 	}
 }
 
-func BenchmarkInts(b *testing.B) {
+var result [][]int
+
+func BenchmarkInts10(b *testing.B) {
 	s := []int{}
 	for i := 0; i < 10; i++ {
-		s = append(s, i)
+		s = append(s, rand.Intn(100))
 	}
 	b.ResetTimer()
-	heappermutations.Ints(s)
+	for n := 0; n < b.N; n++ {
+		result = heappermutations.Permute(s)
+	}
 }
