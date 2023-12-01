@@ -1,4 +1,4 @@
-The **heappermutations** package provides a primitive to generate all possible permutations of typed-datasets, following B. R. Heap's algorithm.
+The **heappermutations** package provides a Golang implementation of B. R. Heap's algorithm to generate all possible permutations of typed-datasets.
 
 Based on [https://en.wikipedia.org/wiki/Heap's_algorithm](https://en.wikipedia.org/wiki/Heap%27s_algorithm)
 
