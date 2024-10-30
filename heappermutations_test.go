@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Nicolas Perraud <np bitbox io>
+// Copyright (c) 2024 Nicolas Perraud <np bitbox io>
 // Thanks: @yberman
 
 package heappermutations_test
@@ -13,7 +13,7 @@ import (
 
 func ExamplePermute() {
 	s := []int{1, 2, 3}
-	perms := heappermutations.Permute[int](s)
+	perms := heappermutations.Permute(s)
 	fmt.Println(perms)
 	//Output: [[1 2 3] [2 1 3] [3 1 2] [1 3 2] [2 3 1] [3 2 1]]
 }

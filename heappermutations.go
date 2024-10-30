@@ -1,7 +1,7 @@
-// Copyright (c) 2023 Nicolas Perraud <np bitbox io>
+// Copyright (c) 2024 Nicolas Perraud <np bitbox io>
 
-// The heappermutations package implements primitives to generate all
-// possible permutations following Heap's algorithm on typed collection.
+// The heappermutations package a generic  primitive to generate all possible
+// permutations following Heap's algorithm on typed collection.
 package heappermutations
 
 // Permute returns all permutations of a slice
